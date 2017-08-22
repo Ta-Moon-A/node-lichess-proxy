@@ -1,0 +1,29 @@
+{
+  "name": "node-lichess-proxy",
+  "version": "1.0.0",
+  "description": "Proxy app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bumbeishvili/node-lichess-proxy.git"
+  },
+  "keywords": [
+    "fb",
+    "repositoy",
+    "page"
+  ],
+  "author": "Dato Bumbeishvili",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bumbeishvili/node-lichess-proxy/issues"
+  },
+  "homepage": "https://github.com/bumbeishvili/node-lichess-proxy#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "request": "^2.81.0"
+  }
+}
