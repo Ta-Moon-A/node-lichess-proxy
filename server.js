@@ -6,9 +6,11 @@ var app = express();
 // Add headers
 app.use(function (req, res, next) {
 
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'https://bumbeishvili.github.io');
-
+   var allowedOrigins = ['http://127.0.0.1:8080','https://bumbeishvili.github.io', 'https://ta-moon-a.github.io'];
+   var origin = req.headers.origin;
+   if(allowedOrigins.indexOf(origin) > -1){
+       res.setHeader('Access-Control-Allow-Origin', origin);
+   }
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
