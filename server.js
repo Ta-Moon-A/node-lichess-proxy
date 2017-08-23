@@ -14,8 +14,9 @@ app.get('/', function (req, res) {
   }
 
   request.post(options, (err, response, data) => {
-    res.json(JSON.parse(data));
+    
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.json(JSON.parse(data));
   })
 
 })
