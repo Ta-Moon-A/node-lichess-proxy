@@ -6,7 +6,7 @@ var app = express();
 // Add headers
 app.use(function (req, res, next) {
 
-   var allowedOrigins = ['http://127.0.0.1:8080','https://bumbeishvili.github.io', 'https://ta-moon-a.github.io'];
+   var allowedOrigins = ['http://127.0.0.1:8080','https://bumbeishvili.github.io', 'https://ta-moon-a.github.io','http://localhost:8080'];
    var origin = req.headers.origin;
    if(allowedOrigins.indexOf(origin) > -1){
        res.setHeader('Access-Control-Allow-Origin', origin);
