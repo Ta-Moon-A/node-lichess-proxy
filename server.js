@@ -3,6 +3,9 @@ var express = require('express');
 var request = require('request');
 var app = express();
 
+var lastSavedTime;
+var lastSavedItem;
+
 // Add headers
 app.use(function (req, res, next) {
 
@@ -34,10 +37,30 @@ app.get('/', function (req, res) {
     url: 'https://lichess.org/api/users',
 
   }
+  
+  if(lastSavedTime){
+     var currentTime = Date.now();
+     var minutesBetweenRequests =  Math.round((((currentTime - lastTime) % 86400000) % 3600000) / 60000);
+     if(minutesBetweenRequests>0){
+        request.post(options, (err, response, data) => {
+          lastSavedItem = JSON.parse(data);
+          lastSavedTime = Date.now();
+          res.json(lastSavedItem);
+      })
+     }else{
+        res.json(lastSavedItem);
+     }
+       
+  }else{
+        request.post(options, (err, response, data) => {
+          lastSavedItem = JSON.parse(data);
+          lastSavedTime = Date.now();
+          res.json(lastSavedItem);
+      })
+  }
+  
 
-  request.post(options, (err, response, data) => {
-    res.json(JSON.parse(data));
-  })
+
 
 })
 var port = process.env.PORT || 3000;
