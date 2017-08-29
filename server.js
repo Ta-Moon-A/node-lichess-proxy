@@ -40,7 +40,7 @@ app.get('/', function (req, res) {
   
   if(lastSavedTime){
      var currentTime = Date.now();
-     var minutesBetweenRequests =  Math.round((((currentTime - lastTime) % 86400000) % 3600000) / 60000);
+     var minutesBetweenRequests =  Math.round((((currentTime - lastSavedTime) % 86400000) % 3600000) / 60000);
      if(minutesBetweenRequests>0){
         request.post(options, (err, response, data) => {
           lastSavedItem = JSON.parse(data);
