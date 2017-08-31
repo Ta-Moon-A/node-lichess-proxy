@@ -51,7 +51,7 @@ app.get('/', function (req, res) {
      if(minutesBetweenRequests>0){
         request.post(options, (err, response, data) => {
           appContext[usernames].lastSavedItem = JSON.parse(data);
-          appContext[usernames]..lastSavedTime = Date.now();
+          appContext[usernames].lastSavedTime = Date.now();
           res.json(appContext[usernames].lastSavedItem);
       })
      }else{
