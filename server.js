@@ -3,8 +3,11 @@ var express = require('express');
 var request = require('request');
 var app = express();
 
-var lastSavedTime;
-var lastSavedItem;
+
+var appContext = {};
+
+
+
 
 // Add headers
 app.use(function (req, res, next) {
@@ -37,25 +40,29 @@ app.get('/', function (req, res) {
     url: 'https://lichess.org/api/users',
 
   }
+
+  if(!appContext[usernames]){
+      appContext[usernames] = {};
+  }
   
-  if(lastSavedTime){
+  if(appContext[usernames].lastSavedTime){
      var currentTime = Date.now();
      var minutesBetweenRequests =  Math.round((((currentTime - lastSavedTime) % 86400000) % 3600000) / 60000);
      if(minutesBetweenRequests>0){
         request.post(options, (err, response, data) => {
-          lastSavedItem = JSON.parse(data);
-          lastSavedTime = Date.now();
-          res.json(lastSavedItem);
+          appContext[usernames].lastSavedItem = JSON.parse(data);
+          appContext[usernames]..lastSavedTime = Date.now();
+          res.json(appContext[usernames].lastSavedItem);
       })
      }else{
-        res.json(lastSavedItem);
+        res.json(appContext[usernames].lastSavedItem);
      }
        
   }else{
         request.post(options, (err, response, data) => {
-          lastSavedItem = JSON.parse(data);
-          lastSavedTime = Date.now();
-          res.json(lastSavedItem);
+          appContext[usernames].lastSavedItem = JSON.parse(data);
+          appContext[usernames].lastSavedTime = Date.now();
+          res.json(appContext[usernames].lastSavedItem);
       })
   }
   
